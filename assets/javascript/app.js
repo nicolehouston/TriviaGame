@@ -39,7 +39,7 @@ function countDown(){
     if(time === 0){
         stopTimer();
         revealAnswer();
-        $("#revealAnswer").text("Out of time! The correct answer is: " + answers[index]);
+        $("#revealAnswer").text("Out of time! The correct answer is: " + questions[index].correctAnswer);
         index++;
         setTimeout(startRound, 3000);
     }
@@ -47,6 +47,7 @@ function countDown(){
 }
 // Create a function that begins each round with a new question and starts the timer over again
 function startRound(){
+    $("#revealAnswer").text("");
     displayQuestion();
     time = 20;
     $("#timeRemaining").text("Time remaining: " + time + " seconds");
@@ -60,7 +61,16 @@ function startRound(){
 $(".answers").click(function(){
     stopTimer();
     if ($(this).val() === questions[index].correctAnswer){
-        alert("hello");
+        revealAnswer();
+        $("#revealAnswer").text("Correct! The answer is: " + questions[index].correctAnswer);
+        index++;
+        setTimeout(startRound, 3000);
+    }
+    else{
+        revealAnswer();
+        $("#revealAnswer").text("Nope! The correct answer is: " + questions[index].correctAnswer);
+        index++;
+        setTimeout(startRound, 3000);
     }
     
 })

@@ -3,11 +3,14 @@ var showTimer;
 var time = 20;
 var timerRunning = false;
 var index = 0;
+var correct = 0;
+var incorrect = 0;
 
 // Create an array with question objects
 var questions = [
-    {q:"What is the name of Elrond's daughter?", a:["Eowyn", "Arwen", "Galdriel"], correctAnswer: "Arwen"},
-    {q:"How old is Bilbo Baggins turning at the beginning of the 'Fellowship of the Ring'?", a:["111", "121", "185"], correctAnswer: "111"}
+    {q:"How many members are there in the fellowship of the ring?", a:["Eight", "Twelve", "Nine"], correctAnswer: "Nine"},
+    {q:"What is the name of Elrond's daughter?", a:["Eowyn", "Arwen", "Galadriel"], correctAnswer: "Arwen"},
+    {q:"How old is Bilbo Baggins turning at the beginning of the 'Fellowship of the Ring'?", a:["111", "121", "185"], correctAnswer: "111"},
 ];
 
 // Create functions
@@ -38,6 +41,7 @@ function countDown(){
     $("#timeRemaining").text("Time remaining: " + time + " seconds");
     if(time === 0){
         stopTimer();
+        incorrect++;
         revealAnswer();
         $("#revealAnswer").text("Out of time! The correct answer is: " + questions[index].correctAnswer);
         index++;
@@ -45,6 +49,25 @@ function countDown(){
     }
     time--;
 }
+
+function restartGame(){
+    $("#revealAnswer").text('');
+    $("#timeRemaining").text('');
+    $("#question").text('');
+    $("#answer1").text('');
+    $("#answer2").text('');
+    $("#answer3").text('');
+    var startOver = $("<button id='startOver'>").text("Replay");
+    $(".container").append(startOver); 
+    $("#startOver").click(function(){
+        timerRunning = false;
+        index = 0;
+        correct = 0;
+        incorrect = 0;
+        startRound();
+    }) 
+}
+
 // Create a function that begins each round with a new question and starts the timer over again
 function startRound(){
     $("#revealAnswer").text("");
@@ -58,26 +81,42 @@ function startRound(){
 
 }
 
-$(".answers").click(function(){
-    stopTimer();
-    if ($(this).val() === questions[index].correctAnswer){
-        revealAnswer();
-        $("#revealAnswer").text("Correct! The answer is: " + questions[index].correctAnswer);
-        index++;
-        setTimeout(startRound, 3000);
-    }
-    else{
-        revealAnswer();
-        $("#revealAnswer").text("Nope! The correct answer is: " + questions[index].correctAnswer);
-        index++;
-        setTimeout(startRound, 3000);
-    }
-    
-})
-
 // Function that begins the game when the user hits the start button
 //========================================================================================================
 $("#startButton").click(function(){
     $(".start").empty();
     startRound();
 })
+
+// This function runs when the user selects an answer choice
+$(".answers").click(function(){
+    stopTimer();
+    if ($(this).val() === questions[index].correctAnswer){
+        correct++;
+        revealAnswer();
+        $("#revealAnswer").text("Correct! The answer is: " + questions[index].correctAnswer);
+        index++;
+        if(index === questions.length){
+            setTimeout(restartGame, 3000);
+        }
+        else{
+            setTimeout(startRound, 3000);
+        }
+        
+    }
+    else {
+        incorrect++;
+        revealAnswer();
+        $("#revealAnswer").text("Nope! The correct answer is: " + questions[index].correctAnswer);
+        index++;
+        if(index === questions.length){
+            setTimeout(restartGame, 3000);
+        }
+        else{
+            setTimeout(startRound, 3000);
+        }
+    }
+    
+})
+
+ 

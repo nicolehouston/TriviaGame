@@ -36,7 +36,7 @@ h1 {
 }
 
 #timeRemaining {
-    color: #c5e3e8;
+    color: white;
     text-align: center;
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
@@ -44,9 +44,10 @@ h1 {
 }
 
 #revealAnswer{
-    color: white;
+    color: #ffda63;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 25px;
+    text-align: center;
 }
 
 #question {
@@ -55,13 +56,13 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 10px;
     margin-bottom: 20px;
-    text-align: center;
 }
 
 #startButton, #startOver {
     width: 10%;
     margin-right: 45%;
     margin-left: 45%;
+    margin-top: 20px;
     background-color: black;
     color: white;
     border: #821a0a 1px solid;
@@ -79,3 +80,10 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+#answerImage {
+    display: block;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+}

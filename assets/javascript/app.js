@@ -7,7 +7,7 @@ var correct = 0;
 var incorrect = 0;
 var unanswered = 0;
 
-// Create an array with question objects
+// Create an array with question objects that include the question, possible answers, the correct answer, and a picture
 var questions = [
     {q:"How many members are there in the fellowship of the ring?", a:["Eight", "Twelve", "Nine"], correctAnswer: "Nine", pic:"http://ahscribbles.com/wp-content/uploads/2016/08/fellowship8.jpg"},
     {q:"What is the name of Elrond's daughter?", a:["Eowyn", "Arwen", "Galadriel"], correctAnswer: "Arwen", pic:"https://i.pinimg.com/originals/d1/e4/29/d1e429c9f3735dcb26561ca7dfba8d6e.jpg"},
@@ -22,6 +22,8 @@ var questions = [
 ];
 
 // Create functions
+// ==============================================================================================
+// Function that displays the question with possible answer choices
 function displayQuestion(){
     var question = $("<p id='question'>").text(questions[index].q);
     $(".container").append(question);
@@ -32,6 +34,7 @@ function displayQuestion(){
     }
 }
 
+// Function that stops the timer
 function stopTimer(){
     timerRunning = false;
     clearInterval(showTimer);
@@ -70,7 +73,7 @@ function countDown(){
 function restartGame(){
     $("#answerImage").remove();
     $("#revealAnswer").text("Want to play again?");
-    $("#timeRemaining").text("Total Correct: " + correct + "     " + "Total Incorrect: " + incorrect + "      " + "Total Unanswered: " + unanswered);
+    $("#timeRemaining").text("Total Correct: " + correct + "     Total Incorrect: " + incorrect + "      Total Unanswered: " + unanswered);
     clearQuestion();
     var startOver = $("<button id='startOver'>").text("Replay");
     $(".container").append(startOver); 

@@ -5,6 +5,7 @@ var timerRunning = false;
 var index = 0;
 var correct = 0;
 var incorrect = 0;
+var unanswered = 0;
 
 // Create an array with question objects
 var questions = [
@@ -48,7 +49,7 @@ function countDown(){
     $("#timeRemaining").text("Time remaining: " + time + " seconds");
     if(time === 0){
         stopTimer();
-        incorrect++;
+        unanswered++;
         clearQuestion();
         var revealedAnswer = $("<p id='revealAnswer'>").text("Out of time! The correct answer is: " + questions[index].correctAnswer);
         $(".container").append(revealedAnswer);
@@ -65,11 +66,11 @@ function countDown(){
     time--;
 }
 
-// Function to restart game
+// Function to restart game and set everything back to zero
 function restartGame(){
     $("#answerImage").remove();
     $("#revealAnswer").text("Want to play again?");
-    $("#timeRemaining").text("Total Correct: " + correct + "   " + "Total Incorrect: " + incorrect);
+    $("#timeRemaining").text("Total Correct: " + correct + "     " + "Total Incorrect: " + incorrect + "      " + "Total Unanswered: " + unanswered);
     clearQuestion();
     var startOver = $("<button id='startOver'>").text("Replay");
     $(".container").append(startOver); 
@@ -78,6 +79,7 @@ function restartGame(){
         index = 0;
         correct = 0;
         incorrect = 0;
+        unanswered = 0;
         startRound();
     }) 
 }

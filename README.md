@@ -8,3 +8,4 @@
 * Questions and answer screens automatically switch until the player reaches the final question.
 * On the final screen the player is shown how many questions they answered correctly and incorrectly. They are also asked if they would like to play again.
 * If the player hits the restart button then their score is set back to zero and the game begins again.
+*Link to deployed project: https://nicolehouston.github.io/TriviaGame/
